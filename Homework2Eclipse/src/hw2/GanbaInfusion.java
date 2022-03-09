@@ -47,7 +47,7 @@ public class GanbaInfusion extends Professor{
 	 */
 	public Professor getNthProf(int n) {
 		//throw new UnsupportedOperationException();
-		return professors.search(name, rarity);
+		return professors.getAt(n);
 		
 	}
 	
@@ -60,7 +60,7 @@ public class GanbaInfusion extends Professor{
 	public int getSize() {
 		// TODO: Implement the function
 		//throw new UnsupportedOperationException();
-		return prof.length();
+		return professors.length();
 	}
 	
 	
@@ -87,11 +87,16 @@ public class GanbaInfusion extends Professor{
 	public int sell(Professor toSell) {
 		//TODO: Implement the function.
 		//throw new UnsupportedOperationException();
-		if(ArrayList.contains(toSell)) {
-			gold = gold + rarity;
-			prof.remove(Professor));
+		int cost = 0;
+		if(toSell == null) {
+			throw new UnsupportedOperationException();
 		}
+		cost = toSell.getRarity();
+		gold = gold + cost;
+		professors.delete(toSell);
+		return cost;
 	}
+	
 
 	
 	
@@ -104,9 +109,13 @@ public class GanbaInfusion extends Professor{
 	public String toString() {
 		// TODO: Build our string to return
 		//throw new UnsupportedOperationException();
-		return prof;
-		for(int i=0; i < prof.length; i++) {
-		System.out.print(name, rarity);
+		String listofprofessors = "";
+		//return prof;
+		for(int i=0; i < professors.length(); i++) {
+			Professor professors = professors.getAt(i);
+			listofprofessors +=professors.getName() + "" + professors.getRarity();
+		return listofprofessors;
+		System.out.print(listofprofessors);
 		}
 	}
 	
@@ -127,9 +136,23 @@ public class GanbaInfusion extends Professor{
 		// TODO: Need to check if there is enough gold, and subtract 5 from our count
 		// TODO: Need to update our list with the new professor
 		if (rarity < gold) {
-			gold =  gold - 5;
-			prof.add(Professor);
+			String pulled = "";
+			Random number = new Random();
+			int num = number.nextInt(101);
+			if(num<= 99) {
+				pulled = "Freitas";
+			
+			} else if(num <= 65) {
+				pulled = "Edmiston";
+			} else {
+				pulled = "Toal";
+			}
+			Professor prof = new Professor(pulled);
+			gold -= 5;
+			professors.append(prof);
+			return prof;
 		}
+		
 		//throw new UnsupportedOperationException();
 	}
 	

@@ -44,7 +44,7 @@ public class DoubleLink {
 			}
 			return null; 
 		}
-		public delete(Professor professor) {
+		public void delete(Professor professor) {
 			if(length == 0) {
 				throw new UnsupportedOperationException();
 			}
@@ -56,6 +56,7 @@ public class DoubleLink {
 						previous.next = current.next;
 					}
 				}
+				
 				if(current.data.equals(professor) && length == 1) {
 					head.data = null;
 					length --;	
@@ -68,11 +69,23 @@ public class DoubleLink {
 					head = current.next;
 					head.prev = null;
 				}
+				
+			}
 				current.data = null;
 				length --;
 				current = current.next;
 				
+			
+		}
+		public void empty(int i) {
+			if(i < 0 || i >= length) {
+				throw new UnsupportedOperationException();
 			}
+			Node current = head;
+			for(int s = 0; s < length; s++) {
+				current = current.next;
+			}
+			current.data = null;
 		}
 		public Professor getAt(int p) {
 			if(p < 0 || p>= length) {
@@ -84,25 +97,51 @@ public class DoubleLink {
 			}
 			return current.data;
 		}
-		public removeAt(int i) {
+		public void append(Professor data) {
+			Node append = new Node(data);
+			if(length == 0) {
+				head = append;	
+			} else {
+				bottom.next = append;
+				
+			}
+			append.next = bottom;
+			bottom = append;
+		}
+		
+		public void removeAt(int i) {
+			
 			if(i<0 || i >= length) {
 				throw new UnsupportedOperationException();
+			}
+			Node current = head;
+			
+			if(current.next != null) {
+				if(current.prev != null) {
+					Node previous = current.prev;
+					previous.next = current.next;
+					current.prev = previous;
+				}
 			}
 			if(length == 1) {
 				head.data = null;
 				length --;
 				return;
 			}
-			Node current = head;
-			for(int i = 0; i < length; i++) {
+
+			for(int s = 0; s < length; s++) {
 				current = current.next;
 			}
 			if(current.next == null) {
 				Node previous = current.prev;
 				previous.next = null;
 			}
-			if(current.prev == null)
-		}	
+			if(current.prev == null) {
+				current.next = head;
+				head.prev = null;
+			}
 			
+		}	
+		
 		
 }
