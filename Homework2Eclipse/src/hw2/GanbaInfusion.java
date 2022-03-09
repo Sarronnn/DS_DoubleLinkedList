@@ -3,20 +3,28 @@ package hw2;
 import java.util.Random;
 
 
-public class GanbaInfusion {
+public class GanbaInfusion extends Professor{
 	
 	// TODO: Define your fields
-	
-	// gold should be 5 by default
-	private int gold;
+	DoubleLink professors; 
+	private String name;
+	private int rarity;
+	private int gold = 5;
 	
 	GanbaInfusion(){
 		// TODO: Implement a default constructor
+		 professors = new DoubleLink();
+		
 	}
 	
 	GanbaInfusion(Professor[] prebuilt){
 		// TODO: Implement a constructor from an array
+		professors = new DoubleLink();
+		
 	}
+	
+		
+	
 
 	
 	
@@ -27,7 +35,8 @@ public class GanbaInfusion {
 	 */
 	public Professor getProf(String name, int r) {
 		// TODO: Implement the function
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return professors.search(name, rarity);
 	}
 	
 	
@@ -37,7 +46,9 @@ public class GanbaInfusion {
 	 * @return The n'th professor
 	 */
 	public Professor getNthProf(int n) {
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return professors.search(name, rarity);
+		
 	}
 	
 	
@@ -48,7 +59,8 @@ public class GanbaInfusion {
 	 */
 	public int getSize() {
 		// TODO: Implement the function
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return prof.length();
 	}
 	
 	
@@ -58,7 +70,8 @@ public class GanbaInfusion {
 	 * @return the amount of gold
 	 */
 	public int getGold() {
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return gold;
 	}
 	
 	
@@ -73,7 +86,11 @@ public class GanbaInfusion {
 	 */
 	public int sell(Professor toSell) {
 		//TODO: Implement the function.
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		if(ArrayList.contains(toSell)) {
+			gold = gold + rarity;
+			prof.remove(Professor));
+		}
 	}
 
 	
@@ -86,7 +103,11 @@ public class GanbaInfusion {
 	 */
 	public String toString() {
 		// TODO: Build our string to return
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return prof;
+		for(int i=0; i < prof.length; i++) {
+		System.out.print(name, rarity);
+		}
 	}
 	
 	
@@ -105,8 +126,11 @@ public class GanbaInfusion {
 	public Professor pull() {		
 		// TODO: Need to check if there is enough gold, and subtract 5 from our count
 		// TODO: Need to update our list with the new professor
-		
-		throw new UnsupportedOperationException();
+		if (rarity < gold) {
+			gold =  gold - 5;
+			prof.add(Professor);
+		}
+		//throw new UnsupportedOperationException();
 	}
 	
 	
@@ -123,7 +147,11 @@ public class GanbaInfusion {
 	 */
 	public Professor fusion(Professor base, Professor fodder) {
 		// TODO: Implement this function
-		throw new UnsupportedOperationException();
+		if (base.rarity.equals(fodder.rarity)) {
+			base.rarity ++;
+			return base;
+		}
+		//throw new UnsupportedOperationException();
 	}
 	
 
@@ -148,12 +176,15 @@ public class GanbaInfusion {
 	 * @return
 	 */
 	public boolean debate(GanbaInfusion other) {
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		for(int i=0; i < prof.length; i++) {
+			
+		}
 	}
 	
 	
 	// HELPER FUNCITONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+
 	
 	/**
 	 * Generates a random number between 1 and 100, and returns true if that number is less than probability. This means we return true with chance "probability" 
