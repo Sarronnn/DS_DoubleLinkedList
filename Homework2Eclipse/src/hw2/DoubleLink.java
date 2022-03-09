@@ -107,9 +107,12 @@ public class DoubleLink {
 			}
 			append.next = bottom;
 			bottom = append;
+			length++;
 		}
-		
-		public void removeAt(int i) {
+			public int length() {
+				return length;
+			}
+			public void removeAt(int i) {
 			
 			if(i<0 || i >= length) {
 				throw new UnsupportedOperationException();
