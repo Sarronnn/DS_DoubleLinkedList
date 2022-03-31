@@ -1,5 +1,5 @@
 package hw2;
-import intlist.IntLinkedList.Node;
+
 
 public class DoubleLink {
 		private int length;
@@ -10,10 +10,11 @@ public class DoubleLink {
 			private Professor data;
 			private Node prev;
 			private Node next;
+			
 			private Node(Professor data) {
 				this.data = data;
-				prev = null;
 				next = null;
+				prev = null;
 			}
 			private Node(Professor data, Node prev) {
 				this.data = data;
@@ -40,7 +41,7 @@ public class DoubleLink {
 				if (name == current.data.getName() && rarity == current.data.getRarity()) {
 					return current.data;
 				}
-			current = current.next;
+				current = current.next;
 			}
 			return null; 
 		}
@@ -50,101 +51,82 @@ public class DoubleLink {
 			}
 			Node current = head;
 			for(int i = 0; i < length; i++) {
-				if(current.next != null) {
-					if(current.prev != null) {
-						Node previous = current.prev;
-						previous.next = current.next;
-					}
-				}
 				
-				if(current.data.equals(professor) && length == 1) {
+				if(current.data == professor) {
+					if(length == 1) {
 					head.data = null;
+					head = null;
 					length --;	
-				}
-				if(current.next == null) {
-					Node previous = current.prev;
-					previous.next = null;
-				}
-				if(current.prev == null) {
-					head = current.next;
-					head.prev = null;
-				}
+					break;
+					}
 				
+					if(current.next == null) {
+						Node prevNode = current.prev;
+						prevNode.next = null;
+					}
+					if(current.prev == null) {
+						head = current.next;
+						head.prev = null;
+					}
+					if(current.next != null && current.prev != null) {
+						Node prevNode = current.prev;
+						prevNode.next = current.next;
+						current.prev = prevNode;
+					}
+					current.data = null;
+					length --;
+				} else {
+					current = current.next;
+				}
 			}
-				current.data = null;
-				length --;
-				current = current.next;
-				
-			
 		}
-		public void empty(int i) {
-			if(i < 0 || i >= length) {
+		public void empty(Professor professor) {
+			if(length <= 0) {
 				throw new UnsupportedOperationException();
+			} else {
+				Node current = head;
+				for(int i = 0; i < length; i++) {
+					current = current.next;
+				}
+				current.data = null;
 			}
-			Node current = head;
-			for(int s = 0; s < length; s++) {
-				current = current.next;
-			}
-			current.data = null;
 		}
 		public Professor getAt(int p) {
 			if(p < 0 || p>= length) {
 				throw new UnsupportedOperationException();
 			}
+			
 			Node current = head;
-			for(int i = 0; i < length; i++) {
+			for(int i = 0; i < p; i++) {
 				current = current.next;
 			}
 			return current.data;
 		}
 		public void append(Professor data) {
-			Node append = new Node(data);
+			Node toAppend = new Node(data);
 			if(length == 0) {
-				head = append;	
+				head = toAppend;	
 			} else {
-				bottom.next = append;
-				
+				bottom.next = toAppend;
 			}
-			append.next = bottom;
-			bottom = append;
+			toAppend.next = bottom;
+			bottom = toAppend;
 			length++;
 		}
-			public int length() {
-				return length;
-			}
-			public void removeAt(int i) {
-			
-			if(i<0 || i >= length) {
-				throw new UnsupportedOperationException();
-			}
+		public int length() {
+			return length;
+		}
+		public int index(String name, int rarity) {
 			Node current = head;
-			
-			if(current.next != null) {
-				if(current.prev != null) {
-					Node previous = current.prev;
-					previous.next = current.next;
-					current.prev = previous;
+			for(int i = 0; i < length; i++) {
+				if(current.data != null) {
+					if(name.equals(current.data.getName()) && rarity == current.data.getRarity()) {
+						return i;
+					}
+					current = current.next;
 				}
 			}
-			if(length == 1) {
-				head.data = null;
-				length --;
-				return;
-			}
-
-			for(int s = 0; s < length; s++) {
-				current = current.next;
-			}
-			if(current.next == null) {
-				Node previous = current.prev;
-				previous.next = null;
-			}
-			if(current.prev == null) {
-				current.next = head;
-				head.prev = null;
-			}
-			
-		}	
-		
+			return -1;
+		}
 		
 }

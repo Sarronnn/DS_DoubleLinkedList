@@ -2,7 +2,7 @@ package hw2;
 
 public class Professor {
 	
-	private int rarity;
+	int rarity;
 	String name;
 	
 	
