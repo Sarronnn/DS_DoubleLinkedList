@@ -8,7 +8,7 @@ public class GanbaInfusion {
 	// TODO: Define your fields
 	DoubleLink prof; 
 	private int gold = 5;
-	private static final int LS = 50;
+	private static final int S = 50;
 	
 	GanbaInfusion(){
 		// TODO: Implement a default constructor
@@ -213,12 +213,14 @@ public class GanbaInfusion {
 	 */
 	public boolean debate(GanbaInfusion other) {
 		//throw new UnsupportedOperationException();
+		Random rand = new Random ();
 		int roll;
 		for(int i=0; i < prof.length(); i++) {
+			
 			roll = rand.nextInt(100);
 			Professor professor = prof.getAt(i);
 			int higherRarity = professor.getRarity();
-			int chanceOfPicking = LS + (higherRarity * 10);
+			int chanceOfPicking = S + (higherRarity * 10);
 			if (roll <= chanceOfPicking) {
 				increaseGold();
 				return true;
